@@ -3756,9 +3756,9 @@ NO_INLINE void jswrap_banglejs_init() {
 
 #ifdef BANGLEJS_Q3
 #ifndef EMULATED
-  jshSetPinShouldStayWatched(TOUCH_PIN_IRQ,true);
-  channel = jshPinWatch(TOUCH_PIN_IRQ, true, JSPW_NONE);
-  if (channel!=EV_NONE) jshSetEventCallback(channel, touchHandler);
+  //jshSetPinShouldStayWatched(TOUCH_PIN_IRQ,true);
+  //channel = jshPinWatch(TOUCH_PIN_IRQ, true, JSPW_NONE);
+  //if (channel!=EV_NONE) jshSetEventCallback(channel, touchHandler);
 #endif
 #endif
 
