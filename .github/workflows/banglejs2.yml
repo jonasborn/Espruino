@@ -1,0 +1,38 @@
+name: Firmware build
+
+on:
+  push:
+    branches: [ '*' ]
+    
+permissions:
+  contents: read
+
+jobs:
+
+  # Build firmware for BANGLEJS2
+  build_banglejs2:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Set up and build BANGLEJS2
+      env:
+        TRAVIS: 1
+        RELEASE: 1
+        DFU_UPDATE_BUILD: 1
+        BOARD: BANGLEJS2 
+        UPLOADTOKEN: ${{ secrets.UPLOADTOKEN }}
+      run: |
+        source ./scripts/provision.sh BANGLEJS2
+        make
+        ./scripts/ci_upload.sh
+    - name: Upload BANGLEJS2 build artifact
+      uses: actions/upload-artifact@v4.4.3
+      with:
+        name: BANGLEJS2
+        path: |
+          bin/*.bin
+          bin/*.hex
+          bin/*.tgz
+          bin/*.zip
