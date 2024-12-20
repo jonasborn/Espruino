@@ -1,4 +1,4 @@
-name: Firmware build
+name: banglejs2 Firmware build
 
 on:
   push:
